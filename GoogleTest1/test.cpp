@@ -94,8 +94,8 @@ TEST_P(TestConstructorDI_MockObject, TestWithGMockVerifyLIneSeparation)
 
 }
 
-INSTANTIATE_TEST_CASE_P(TestCase, TestConstructorDI_MockObject,
-	::testing::ValuesIn(testCases_ExampleVerificationParameter));
+//INSTANTIATE_TEST_CASE_P(TestCase, TestConstructorDI_MockObject,
+//	::testing::ValuesIn(testCases_ExampleVerificationParameter));
 
 //class TestConstructorDI_VerifyNumber2 : public MockObjectHolderFixure,
 //	TEST_F(TestConstructorDI_VerifyNumber2, TestWithConstructorVerifyLineSeparation)

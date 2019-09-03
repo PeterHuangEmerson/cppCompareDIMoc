@@ -2,13 +2,10 @@
 #include <string>
 #include <filesystem>
 
-using namespace std;
-
-
 class IWindowsFileSystem
 {
 public:
-	
+
 	virtual HANDLE WINAPI CreateFile(
 		_In_	LPCSTR                lpFileName,
 		_In_	DWORD                 dwDesiredAccess,
@@ -45,6 +42,9 @@ public:
 	IWindowsFileSystem& operator=(const IWindowsFileSystem&&) = delete;
 
 };
+
+using namespace std;
+
 
 
 //class FileSystemOperation final : virtual public IWindowsFileSystem

@@ -1,12 +1,10 @@
 #pragma once
 
-//#include <windows.h>
+#include <windows.h>
 #include "framework.h"
 #include "ProcessInput.h"
 #include "SelectLine.h"
 #include"FileSystemStub.h"
-using namespace std;
-
 
 class ReadFileLine
 {

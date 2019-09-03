@@ -4,8 +4,6 @@
 #include "ReadFileLine.h"
 #include "MockFileSystemOperation.h"
 
-using namespace std;
-
 typedef struct SourceVerification
 {
 	int size;
@@ -53,6 +51,7 @@ public:
 			HANDLE                hTemplateFile
 			) -> HANDLE
 			{
+				//ASSERT_EQ(m_Path, lpFileName);
 				m_FileOpened = true;
 				return m_hMockProcess;
 			});
