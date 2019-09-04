@@ -115,7 +115,7 @@ TEST_P(TestGmock_VerifyNumber, TestWithGMockVerifyLIneSeparation)
 
 	EXPECT_CALL(*mockFs, CloseHandle(testing::_)).WillOnce(Return(TRUE));
 
-	StringBuffer sb = readFileLineSp->ReadFileAndResturnCertianLength(m_Path, sourceVerification.size);
+	StringBuffer sb = readFileLineSp->ReadFileAndReturnCertianLength(m_Path, sourceVerification.size);
 
 	UINT resultCnt = sb.size();
 	UINT expectedCnt = sourceVerification.verification.size();

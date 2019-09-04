@@ -4,6 +4,8 @@
 #include "ReadFileLine.h"
 #include "MockFileSystemOperation.h"
 
+
+
 typedef struct SourceVerification
 {
 	int size;
@@ -16,6 +18,7 @@ class TestWithDITestFixture : public ::testing::Test
 protected:
 	const HANDLE m_hMockProcess = reinterpret_cast<HANDLE>(0x44444444);
 	const string m_Path = "d:\testing\abc.txt";
+	const string m_ErrorPath = "d:\\error\\path.txt";
 public:
 	shared_ptr<ReadFileLine> readFileLineSp;
 	MockFileSystemOperation mockFS;
@@ -51,7 +54,7 @@ public:
 			HANDLE                hTemplateFile
 			) -> HANDLE
 			{
-				//ASSERT_EQ(m_Path, lpFileName);
+				EXPECT_EQ(m_Path, lpFileName);
 				m_FileOpened = true;
 				return m_hMockProcess;
 			});
@@ -131,7 +134,7 @@ TEST_P(TestConstructorDI_VerifyNumber, TestWithConstructorVerifyLineSeparation)
 {
 	sourceVerification = GetParam();
 
-	StringBuffer sb = readFileLineSp->ReadFileAndResturnCertianLength(m_Path, sourceVerification.size);
+	StringBuffer sb = readFileLineSp->ReadFileAndReturnCertianLength(m_Path, sourceVerification.size);
 
 	UINT resultCnt = sb.size();
 	UINT expectedCnt = sourceVerification.verification.size();

@@ -17,5 +17,5 @@ public:
 	ReadFileLine(IProcessInput &_iProcessInput, ISelctLine & _iSelectLine, IWindowsFileSystem& _iWindowsFileSystem) :
 		iProcessInput(_iProcessInput), iSelectLine(_iSelectLine), iWindowsFileSystem(_iWindowsFileSystem)
 	{}
-	virtual StringBuffer ReadFileAndResturnCertianLength(string directoryToSearch, int folderWithNumberofFiles);
+	virtual StringBuffer ReadFileAndReturnCertianLength(string directoryToSearch, int folderWithNumberofFiles);
 };

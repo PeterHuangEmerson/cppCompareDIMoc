@@ -71,41 +71,17 @@ public:
 };
 
 
-class TestConstructorDI_MockObject : public MockObjectHolderFixure, public ::testing::WithParamInterface<SourceVerificationType> {};
-TEST_P(TestConstructorDI_MockObject, TestWithGMockVerifyLIneSeparation)
-{
-	SourceVerification sourceVerification = GetParam();
-
-	int value = 52;
-	char  expected[] = "52";
-	size_t bufSize = sizeof("52");
-	char* resultValue = (char*)new char[3];
-
-	EXPECT_CALL(*pMockObjectToTest, Testfunct(52, testing::_)).WillOnce(SetArgNPointeeTo<1>(std::begin(expected), bufSize));
-
-	RunTest(value, resultValue);
-
-	string result = resultValue;
-	string expect = expected;
-
-	ASSERT_EQ(expect, result);
-
-	//StringBuffer sb = readFileLineSp->ReadFileAndResturnCertianLength(m_Path, sourceVerification.size);
-
-}
-
-//INSTANTIATE_TEST_CASE_P(TestCase, TestConstructorDI_MockObject,
-//	::testing::ValuesIn(testCases_ExampleVerificationParameter));
-
-//class TestConstructorDI_VerifyNumber2 : public MockObjectHolderFixure,
-//	TEST_F(TestConstructorDI_VerifyNumber2, TestWithConstructorVerifyLineSeparation)
+//class TestConstructorDI_MockObject : public MockObjectHolderFixure, public ::testing::WithParamInterface<SourceVerificationType> {};
+//TEST_P(TestConstructorDI_MockObject, TestWithGMockVerifyLIneSeparation)
 //{
+//	SourceVerification sourceVerification = GetParam();
+//
 //	int value = 52;
-//	const char  expected[] = "52";
+//	char  expected[] = "52";
 //	size_t bufSize = sizeof("52");
 //	char* resultValue = (char*)new char[3];
 //
-//	EXPECT_CALL(*m_pMockObjectToTest, Testfunct(52, testing::_)).WillOnce(SetArgNPointeeTo<1>(std::begin(expected), bufSize));
+//	EXPECT_CALL(*pMockObjectToTest, Testfunct(52, testing::_)).WillOnce(SetArgNPointeeTo<1>(std::begin(expected), bufSize));
 //
 //	RunTest(value, resultValue);
 //
@@ -117,3 +93,25 @@ TEST_P(TestConstructorDI_MockObject, TestWithGMockVerifyLIneSeparation)
 //	//StringBuffer sb = readFileLineSp->ReadFileAndResturnCertianLength(m_Path, sourceVerification.size);
 //
 //}
+
+
+
+class TestConstructorDIv1 : public MockObjectHolderFixure {};
+TEST_F(TestConstructorDIv1, TestConstructorDI_VerifyNumber2 )
+{
+	int value = 52;
+	const char  expected[] = "52";
+	const char  Notexpected[] = "53";
+	size_t bufSize = sizeof("52");
+	char* resultValue = (char*)new char[3];
+
+	EXPECT_CALL(*pMockObjectToTest, Testfunct(52, testing::_)).WillOnce(SetArgNPointeeTo<1>(std::begin(expected), bufSize));
+
+	RunTest(value, resultValue);
+
+	string result = resultValue;
+	string expect = expected;
+
+	EXPECT_EQ(expect, result);
+
+}

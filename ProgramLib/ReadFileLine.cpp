@@ -5,16 +5,12 @@
 
 
 
-StringBuffer ReadFileLine::ReadFileAndResturnCertianLength(string myfile, int lineLength)
+StringBuffer ReadFileLine::ReadFileAndReturnCertianLength(string myfile, int lineLength)
 {
 	HANDLE hFile = iWindowsFileSystem.CreateFile(myfile.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 
-	/*HANDLE hFile = CreateFile(myfile.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL,
-		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);*/
-
 	DWORD fileSizeHigh = 0;
-	//DWORD fileSizeLow = GetFileSize(hFile, &fileSizeHigh);
 
 	DWORD fileSizeLow = iWindowsFileSystem.GetFileSize(hFile, &fileSizeHigh);
 
@@ -26,9 +22,7 @@ StringBuffer ReadFileLine::ReadFileAndResturnCertianLength(string myfile, int li
 		DWORD byteReading = fileSizeLow;
 		char* readBuffer = new char[fileSizeLow];
 		readBuffer[fileSizeLow] = 0;
-		
-		//	readSuccess = ReadFile(hFile, readBuffer, byteReading, &byteReading, nullptr);
-
+	
 		readSuccess = iWindowsFileSystem.ReadFile(hFile, readBuffer, byteReading, &byteReading, nullptr);
 
 		if (readSuccess == TRUE)

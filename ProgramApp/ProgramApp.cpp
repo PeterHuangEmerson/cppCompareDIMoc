@@ -16,8 +16,8 @@ int main()
 	{
 		ReadFileLine readFileLine(processInput, selectLine, fileSystemOperation);
 		string path = "d:\\temp\\test\\readme.txt";
-		int length = 20;
-		readFileLine.ReadFileAndResturnCertianLength(path, 40);
+		int length = 40;
+		readFileLine.ReadFileAndReturnCertianLength(path, length);
 	}
 	catch (exception e)
 	{
