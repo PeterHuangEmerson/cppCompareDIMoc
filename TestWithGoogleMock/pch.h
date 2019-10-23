@@ -12,3 +12,4 @@ using ::testing::Return;
 using ::testing::Mock;
 using ::testing::SetArgPointee;
 using ::testing::_;
+using ::testing::SetArgReferee;

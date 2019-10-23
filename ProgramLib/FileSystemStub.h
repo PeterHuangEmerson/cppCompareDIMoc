@@ -2,6 +2,16 @@
 #include <string>
 #include <filesystem>
 
+class TestClass
+{
+	int a;
+public:
+	TestClass(int _a) : a(_a) {}
+	void Method1() {}
+	void Method2() {}
+};
+
+
 class IWindowsFileSystem
 {
 public:
@@ -32,6 +42,13 @@ public:
 	virtual BOOL WINAPI CloseHandle(
 		_In_	HANDLE       hFile
 	) = 0;
+
+
+	virtual BOOL WINAPI FakeAPIWithOutputByRef(
+		_In_	HANDLE       hFile,
+		_Out_   TestClass    &testClass
+	) = 0;
+
 
 	virtual ~IWindowsFileSystem() = default;
 	IWindowsFileSystem() = default;
@@ -102,5 +119,14 @@ public:
 			hFile,
 			lpFileSizeHigh
 		);
+	}
+
+	BOOL WINAPI FakeAPIWithOutputByRef(
+		_In_	HANDLE       hFile,
+		_Out_   TestClass& testClass
+	)
+	{
+		testClass = *(new TestClass(7));
+		return true;
 	}
 };

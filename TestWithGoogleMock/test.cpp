@@ -58,6 +58,8 @@ public:
 	MOCK_METHOD(DWORD, GetFileSize, (HANDLE hFile, LPDWORD lpFileSizeHigh), (override, Calltype(__stdcall)));
 
 	MOCK_METHOD(BOOL, ReadFile, (HANDLE hFile, LPVOID lpBuffer, DWORD nNumberOfBytesToRead,  LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped), (override, Calltype(__stdcall)));
+
+	MOCK_METHOD(BOOL, FakeAPIWithOutputByRef, (HANDLE hFile, TestClass& testClass), (override, Calltype(__stdcall)));
 };
 
 
@@ -99,7 +101,7 @@ class TestGmock_VerifyNumber : public TestWithDITestFixture, public ::testing::W
 TEST_P(TestGmock_VerifyNumber, TestWithGMockVerifyLIneSeparation)
 {
 	SourceVerification sourceVerification = GetParam();
-
+	TestClass *testClass = new TestClass(-4);
 	char expected[1024] = { 0 };
 
 	strncpy_s(expected,  (const char*)sourceVerification.source.c_str(), sourceVerification.source.length());
@@ -114,6 +116,10 @@ TEST_P(TestGmock_VerifyNumber, TestWithGMockVerifyLIneSeparation)
 			Return(TRUE)));
 
 	EXPECT_CALL(*mockFs, CloseHandle(testing::_)).WillOnce(Return(TRUE));
+
+	EXPECT_CALL(*mockFs, FakeAPIWithOutputByRef(testing::_,testing::_)).WillOnce(
+		DoAll(SetArgReferee<1>((*testClass)),
+			Return(TRUE)));
 
 	StringBuffer sb = readFileLineSp->ReadFileAndReturnCertianLength(m_Path, sourceVerification.size);
 

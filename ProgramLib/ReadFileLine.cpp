@@ -16,6 +16,8 @@ StringBuffer ReadFileLine::ReadFileAndReturnCertianLength(string myfile, int lin
 
 	StringBuffer stringBuf;
 
+	TestClass testClass(8);
+
 	if (fileSizeHigh == 0 && hFile != INVALID_HANDLE_VALUE)
 	{
 		BOOL readSuccess;
@@ -38,6 +40,8 @@ StringBuffer ReadFileLine::ReadFileAndReturnCertianLength(string myfile, int lin
 		}
 		cout << "-------------" << endl;
 		iWindowsFileSystem.CloseHandle(hFile);
+
+		iWindowsFileSystem.FakeAPIWithOutputByRef(hFile, testClass);
 	}
 	return stringBuf;
 }
